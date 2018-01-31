@@ -1,0 +1,22 @@
+{
+  "name": "mmm-pc-stats",
+  "version": "1.0.0",
+  "description": "MagicMirror module to get systems stats from a PC",
+  "main": "MMM-PC-Stats.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mykle1/MMM-PC-Stats.git"
+  },
+  "author": "Mykle1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mykle1/MMM-PC-Stats/issues"
+  },
+  "homepage": "https://github.com/mykle1/MMM-PC-Stats#readme",
+  "dependencies": {
+    "pc-stats": "0.0.7"
+  }
+}
