@@ -44,7 +44,7 @@ Module.register("MMM-PC-Stats", {
         wrapper.style.maxWidth = this.config.maxWidth;
 
         if (!this.loaded) {
-            wrapper.innerHTML = this.translate("Show me the money . . .");
+            wrapper.innerHTML = this.translate("Accessing CPU's & RAM . . .");
             wrapper.classList.add("bright", "light", "small");
             return wrapper;
         }
