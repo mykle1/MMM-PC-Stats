@@ -7,7 +7,7 @@ and Free Ram, and identifies the CPU and the CPU load by percentage, per core.
 
 * You can set how often the data is retrieved (config option)
 
-* You can set if the only the values change or the entire module fades in and out when data is retrieved.
+* You can set it so only the values change or the entire module fades in and out when data is retrieved.
 
 * No CPU temperature, yet! I'll be adding more data.
 
