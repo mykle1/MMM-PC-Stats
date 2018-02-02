@@ -1,7 +1,7 @@
 ## MMM-PC-Stats
 
-Designed for PC boards. Retrieves the CPU name, amount of total RAM 
-and Free Ram, and identifies the CPU and the CPU load by percentage, per core.
+Designed for PC boards. Retrieves the CPU name, amount of total RAM and Free Ram,
+and identifies the CPU and the CPU load by percentage, per core. Tested on ubuntu OS.
 
 ## Initial version. Expect more options.
 
