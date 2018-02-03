@@ -60,16 +60,7 @@ Module.register("MMM-PC-Stats", {
 		
 
         var top = document.createElement("div");
-        top.classList.add("list-row");
-
-
- //       // timestamp
- //       var timestamp = document.createElement("div");
- //       timestamp.classList.add("xsmall", "bright", "timestamp");
- //       timestamp.innerHTML = "Rate as of " + moment.unix(LICE.timestamp).format('h:mm a') + " today";
-//        wrapper.appendChild(timestamp);
-		
-		
+        top.classList.add("list-row");	
 		
 		// cpu
         var source = document.createElement("div");
@@ -142,30 +133,7 @@ Module.register("MMM-PC-Stats", {
         source.classList.add("xsmall", "bright", "cores");
         source.innerHTML = Stats.cpu.threads[7].name + " &nbsp @ &nbsp " +  Number(Math.round(Stats.cpu.threads[7].usage+'e2')+'e-2') + "%";
         wrapper.appendChild(source);
-		
-
-		
-
-/*	
-		// this gets the key from the key/pair of the element (hasOwnProperty)
-		for (var Key in LICE.quotes) {
-		if (LICE.quotes.hasOwnProperty(Key)) {
-	
-		
-	//// Learned this on jsfiddle. HOORAY!
-	//// This dynamically creates the div/tags for each element of LICE.quotes
-		var symbols = LICE.quotes;
-		for (var c in symbols) {
-		
-			var newElement = document.createElement("div");
-			newElement.classList.add("xsmall", "bright", "symbol");
-			newElement.innerHTML += Key + ' = '+ LICE.quotes[Key]; // + " = " + symbols[c];
-			}
-		}
-			wrapper.appendChild(newElement);
 			
-	} // <-- closes key/pair loop
-*/		
         return wrapper;
 		
     }, // closes getDom
