@@ -1,7 +1,7 @@
 ## MMM-PC-Stats
 
-Designed for PC boards. Retrieves the CPU name, amount of total RAM and Free Ram,
-and identifies the CPU and the CPU load by percentage, per core. Tested on ubuntu OS.
+Designed for PC boards running MM. Retrieves the CPU name, amount of total RAM and Free Ram,
+and identifies the CPU and the CPU load by percentage, per core/threads. Tested on ubuntu OS.
 
 ## Initial version. Expect more options.
 
@@ -15,7 +15,9 @@ and identifies the CPU and the CPU load by percentage, per core. Tested on ubunt
 
 ## Examples
 
-![](images/1.PNG)
+* One with color. One standard white>
+
+![](images/2.PNG) ![](images/1.PNG)
 
 ## Installation
 
@@ -39,4 +41,4 @@ and identifies the CPU and the CPU load by percentage, per core. Tested on ubunt
 		}
     },
 	
-## SpaceCowboysDude gets props once again.
+## SpaceCowboysDude gets props for his loop magic trick.
