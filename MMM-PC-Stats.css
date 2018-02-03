@@ -5,17 +5,17 @@
  */
 
 .MMM-PC-Stats .header {
-  color: #FFFFFF;               /* Header color. Default is white. */
+  color: blue;               /* Header color. Default is white. */
 }
 
-.MMM-PC-Stats .cpu {
-  color: #FFFFFF;               /* timestamp color. Default is white. */
+.MMM-PC-Stats .yourCPU {
+  color: #62FF00;               /* yourCPU color. Default is white. */
 }
 
 .MMM-PC-Stats .ram {
-  color: #FFFFFF;               /* source color. Default is white. */
+  color: yellow;               /* ram color. Default is white. */
 }
 
-.MMM-PC-Stats .core {
-  color: #62FF00;               /* symbols color. Default is white. */
+.MMM-PC-Stats .cores {
+  color: cyan;               /* cores color. Default is white. */
 }
