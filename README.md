@@ -15,7 +15,7 @@ and identifies the CPU and the CPU load by percentage, per core/threads. Tested 
 
 ## Examples
 
-* One with color. One standard white>
+* One with color. One standard white.
 
 ![](images/2.PNG) ![](images/1.PNG)
 
