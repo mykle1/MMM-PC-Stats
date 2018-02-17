@@ -74,7 +74,7 @@ Module.register("MMM-PC-Stats", {
 		
 		// graphicsTemp
         var graphicsTemp = document.createElement("div");
-        graphicsTemp.classList.add("small", "bright", "core3Temp");
+        graphicsTemp.classList.add("small", "bright", "graphicsTemp");
 		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
         graphicsTemp.innerHTML = "NVIDIA GeForce GTX660 temp @ " + Sensors["nouveau-pci-0100"]["PCI adapter"].temp1.value + "&deg;C";
         wrapper.appendChild(graphicsTemp);
@@ -150,12 +150,12 @@ Module.register("MMM-PC-Stats", {
     processStats: function(data) {
         this.Stats = data;
         this.loaded = true;
-		console.log(this.Stats); // for checking in dev console
+//		console.log(this.Stats); // for checking in dev console
     },
 	
 	processSensors: function(data) {
         this.Sensors = data; 
-		console.log(this.Sensors); // for checking in dev console
+//		console.log(this.Sensors); // for checking in dev console
     },
 
     scheduleUpdate: function() {

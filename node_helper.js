@@ -28,7 +28,7 @@ module.exports = NodeHelper.create({
 			if (error) throw error; 
 			var result = data;
 			self.sendSocketNotification("SENSORS_RESULT", result);
-			console.log(result);
+	//		console.log(result); // for checking
 			
 		});
     },

@@ -20,30 +20,30 @@
   color: cyan;               /* usage color. Default is white. */
 }
 
+.MMM-PC-Stats .graphicsTemp {
+  color: yellow;               /* usage color. Default is white. */
+}
+
 .MMM-PC-Stats .core0Temp {
-	color: yellow;
+	color: cyan;
+	text-align: right;
+	margin-top: -150px;
 }
 
 .MMM-PC-Stats .core1Temp {
-	color: yellow;
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
 }
 
 .MMM-PC-Stats .core2Temp {
-	color: yellow;
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
 }
 
 .MMM-PC-Stats .core3Temp {
-	color: yellow;
-}
-
-
-
-
-.MMM-PC-Stats .testing {
-   columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
-   position: fixed; /* or absolute */
-  top: 40%;
-  left: 20%;
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
 }
