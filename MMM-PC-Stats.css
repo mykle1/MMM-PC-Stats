@@ -8,14 +8,42 @@
   color: #FFFFFF;               /* Header color. Default is white. */
 }
 
-.MMM-PC-Stats .yourCPU {
-  color: #62FF00;               /* yourCPU color. Default is white. */
-}
-
 .MMM-PC-Stats .ram {
   color: yellow;               /* ram color. Default is white. */
 }
 
-.MMM-PC-Stats .cores {
-  color: cyan;               /* cores color. Default is white. */
+.MMM-PC-Stats .yourCPU {
+  color: #62FF00;               /* yourCPU color. Default is white. */
+}
+
+.MMM-PC-Stats .usage {
+  color: cyan;               /* usage color. Default is white. */
+}
+
+.MMM-PC-Stats .core0Temp {
+	color: yellow;
+}
+
+.MMM-PC-Stats .core1Temp {
+	color: yellow;
+}
+
+.MMM-PC-Stats .core2Temp {
+	color: yellow;
+}
+
+.MMM-PC-Stats .core3Temp {
+	color: yellow;
+}
+
+
+
+
+.MMM-PC-Stats .testing {
+   columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+   position: fixed; /* or absolute */
+  top: 40%;
+  left: 20%;
 }

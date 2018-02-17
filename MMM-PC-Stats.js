@@ -29,6 +29,7 @@ Module.register("MMM-PC-Stats", {
     start: function() {
         Log.info("Starting module: " + this.name);
         this.Stats = {};
+		this.Sensors = {};
         this.scheduleUpdate();
     },
 
@@ -53,13 +54,8 @@ Module.register("MMM-PC-Stats", {
         }
 
         var Stats = this.Stats;
-
-		// Your CPU and CPU speed
-        var yourCPU = document.createElement("div");
-        yourCPU.classList.add("small", "bright", "yourCPU");
-        yourCPU.innerHTML = Stats.cpu.name;
-        wrapper.appendChild(yourCPU);
-
+		var Sensors = this.Sensors;
+		
 
 		// Your total RAM and Free RAM
         var ram = document.createElement("div");
@@ -67,16 +63,77 @@ Module.register("MMM-PC-Stats", {
         ram.innerHTML = "Total RAM = " + Stats.ram.total + Stats.ram.unit + " &nbsp &nbsp " +
             				" Free RAM = " + Stats.ram.free + Stats.ram.unit;
         wrapper.appendChild(ram);
+		
+		
+		// Your CPU and CPU speed
+        var yourCPU = document.createElement("div");
+        yourCPU.classList.add("small", "bright", "yourCPU");
+        yourCPU.innerHTML = Stats.cpu.name;
+        wrapper.appendChild(yourCPU);
+		
+		
+		// graphicsTemp
+        var graphicsTemp = document.createElement("div");
+        graphicsTemp.classList.add("small", "bright", "core3Temp");
+		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
+        graphicsTemp.innerHTML = "NVIDIA GeForce GTX660 temp @ " + Sensors["nouveau-pci-0100"]["PCI adapter"].temp1.value + "&deg;C";
+        wrapper.appendChild(graphicsTemp);
+		
 
         for (var i = 0, len = Stats.cpu.threads.length; i < len; i++) {
 
             var Element = document.createElement("div");
-            Element.classList.add("small", "bright", "cores");
+            Element.classList.add("small", "bright", "usage");
             Element.innerHTML = Stats.cpu.threads[i].name + " &nbsp  @  &nbsp " 
 								+ Number(Math.round(Stats.cpu.threads[i].usage+'e2')+'e-2') + "%";
             wrapper.appendChild(Element);
         }
-
+		
+		
+		// this didn't work
+//		for (var i = 0, len = Sensors['coretemp-isa-0000']['ISA adapter'].length; i < len; i++) {
+		
+		// core0Temp
+        var core0Temp = document.createElement("div");
+        core0Temp.classList.add("small", "bright", "core0Temp");
+		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
+        core0Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].name + " &nbsp  @  &nbsp "
+						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 0"].value + "&deg;C";
+        wrapper.appendChild(core0Temp);
+		
+//		} // for loop
+		
+		
+		// core1Temp
+        var core1Temp = document.createElement("div");
+        core1Temp.classList.add("small", "bright", "core1Temp");
+		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
+        core1Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 1'].name + " &nbsp  @  &nbsp "
+						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 1"].value + "&deg;C";
+        wrapper.appendChild(core1Temp);
+		
+		
+		// core2Temp
+        var core2Temp = document.createElement("div");
+        core2Temp.classList.add("small", "bright", "core2Temp");
+		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
+        core2Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 2'].name + " &nbsp  @  &nbsp "
+						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 2"].value + "&deg;C";
+        wrapper.appendChild(core2Temp);
+		
+		
+		// core3Temp
+        var core3Temp = document.createElement("div");
+        core3Temp.classList.add("small", "bright", "core3Temp");
+		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
+        core3Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 3'].name + " &nbsp  @  &nbsp "
+						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 3"].value + "&deg;C";
+        wrapper.appendChild(core3Temp);
+		
+		
+		
+		
+			
         return wrapper;
 
     },
@@ -93,7 +150,12 @@ Module.register("MMM-PC-Stats", {
     processStats: function(data) {
         this.Stats = data;
         this.loaded = true;
-	//	console.log(this.Stats); // for checking in dev console
+		console.log(this.Stats); // for checking in dev console
+    },
+	
+	processSensors: function(data) {
+        this.Sensors = data; 
+		console.log(this.Sensors); // for checking in dev console
     },
 
     scheduleUpdate: function() {
@@ -106,11 +168,16 @@ Module.register("MMM-PC-Stats", {
     getStats: function() {
         this.sendSocketNotification('GET_STATS');
     },
+	 
 
     socketNotificationReceived: function(notification, payload) {
-        if (notification === "STATS_RESULT") {
+       if (notification === "STATS_RESULT") {
             this.processStats(payload);
             this.updateDom(this.config.animationSpeed);
+        }
+		if (notification === "SENSORS_RESULT") {
+            this.processSensors(payload);
+            this.updateDom(this.config.fadeSpeed);
         }
         this.updateDom(this.config.initialLoadDelay);
     },
