@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mykle1/MMM-PC-Stats#readme",
   "dependencies": {
-    "pc-stats": "0.0.7"
+    "pc-stats": "0.0.7",
 	  "sensors.js": "1.1.3"
   }
 }
