@@ -2,6 +2,7 @@
 
 Designed for PC boards running MM. Retrieves the CPU name, amount of total RAM and Free Ram,
 and identifies the CPU and the CPU load by percentage, per core/threads. Tested on ubuntu OS.
+Now it gets the temperature of each core of your processor
 
 ## Initial version. Expect more options.
 
@@ -9,7 +10,7 @@ and identifies the CPU and the CPU load by percentage, per core/threads. Tested 
 
 * You can set it so only the values change or the entire module fades in and out when data is retrieved.
 
-* No CPU temperature, yet! I'll be adding more data.
+* CPU temperature, per core.
 
 * Annotated .css file included for coloring text and header.
 
@@ -18,6 +19,8 @@ and identifies the CPU and the CPU load by percentage, per core/threads. Tested 
 * One with color. One standard white.
 
 ![](images/2.PNG) ![](images/1.PNG)
+
+![](images/3.png)
 
 ## Installation
 
@@ -33,6 +36,7 @@ and identifies the CPU and the CPU load by percentage, per core/threads. Tested 
            module: 'MMM-PC-Stats',
            position: 'top_left',
 		   config: {
+		   videoCard: "NVIDIA GeForce GTX660", // name of your video card
 			useHeader: true,           // true if you want a header. 
         	   	header: "MMM-PC-Stats",    // Any text you want. useHeader must be true
         	   	maxWidth: "300px",
@@ -41,4 +45,4 @@ and identifies the CPU and the CPU load by percentage, per core/threads. Tested 
 		}
     },
 	
-## SpaceCowboysDude gets props for his loop magic trick.
+## SpaceCowboysDude gets props for his loop magic trick and his combining 2 npm packages in one return
