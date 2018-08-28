@@ -7,6 +7,7 @@
 Module.register("MMM-PC-Stats", {
 
     defaults: {
+		videoCard: "NVIDIA GeForce GTX660", // name of your video card
         useHeader: false,
         header: "",
         maxWidth: "300px",
@@ -70,15 +71,21 @@ Module.register("MMM-PC-Stats", {
         yourCPU.classList.add("small", "bright", "yourCPU");
         yourCPU.innerHTML = Stats.cpu.name;
         wrapper.appendChild(yourCPU);
-		
+        
+        
+        
+        // Check if Graphics cpu has temp sensor
+        var graphicsTempCheck = Sensors["nouveau-pci-0100"]; //["PCI adapter"].temp1.value;
+		if (typeof graphicsTempCheck !== 'undefined'){
 		
 		// graphicsTemp
         var graphicsTemp = document.createElement("div");
         graphicsTemp.classList.add("small", "bright", "graphicsTemp");
 		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
-        graphicsTemp.innerHTML = "NVIDIA GeForce GTX660 temp @ " + Sensors["nouveau-pci-0100"]["PCI adapter"].temp1.value + "&deg;C";
+        graphicsTemp.innerHTML = this.config.videoCard +  " temp @ " + Sensors["nouveau-pci-0100"]["PCI adapter"].temp1.value + "&deg;C";
         wrapper.appendChild(graphicsTemp);
 		
+        }
 
         for (var i = 0, len = Stats.cpu.threads.length; i < len; i++) {
 
@@ -88,48 +95,62 @@ Module.register("MMM-PC-Stats", {
 								+ Number(Math.round(Stats.cpu.threads[i].usage+'e2')+'e-2') + "%";
             wrapper.appendChild(Element);
         }
-		
-		
-		// this didn't work
-//		for (var i = 0, len = Sensors['coretemp-isa-0000']['ISA adapter'].length; i < len; i++) {
+        
+        
+        
+        
+		// Check if cpu core0 has temp sensor
+        var core0TempCheck = Sensors["coretemp-isa-0000"];
+		if (typeof core0TempCheck !== 'undefined'){
 		
 		// core0Temp
         var core0Temp = document.createElement("div");
         core0Temp.classList.add("small", "bright", "core0Temp");
-		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
         core0Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].name + " &nbsp  @  &nbsp "
 						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 0"].value + "&deg;C";
         wrapper.appendChild(core0Temp);
-		
-//		} // for loop
-		
+        }
+        
+        
+        
+		// Check if cpu core1 has temp sensor
+        var core1TempCheck = Sensors["coretemp-isa-0000"];
+		if (typeof core1TempCheck !== 'undefined'){
 		
 		// core1Temp
         var core1Temp = document.createElement("div");
         core1Temp.classList.add("small", "bright", "core1Temp");
-		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
         core1Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 1'].name + " &nbsp  @  &nbsp "
 						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 1"].value + "&deg;C";
         wrapper.appendChild(core1Temp);
-		
+        }
+        
+        
+        // Check if cpu core2 has temp sensor
+        var core2TempCheck = Sensors["coretemp-isa-0000"];
+		if (typeof core2TempCheck !== 'undefined'){
 		
 		// core2Temp
         var core2Temp = document.createElement("div");
         core2Temp.classList.add("small", "bright", "core2Temp");
-		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
         core2Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 2'].name + " &nbsp  @  &nbsp "
 						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 2"].value + "&deg;C";
         wrapper.appendChild(core2Temp);
+        }
 		
+        
+        
+        // Check if cpu core3 has temp sensor
+        var core3TempCheck = Sensors["coretemp-isa-0000"];
+		if (typeof core3TempCheck !== 'undefined'){
 		
 		// core3Temp
         var core3Temp = document.createElement("div");
         core3Temp.classList.add("small", "bright", "core3Temp");
-		//console.log(Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].high);
         core3Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 3'].name + " &nbsp  @  &nbsp "
 						 + Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 3"].value + "&deg;C";
         wrapper.appendChild(core3Temp);
-		
+        }
 		
 		
 		
