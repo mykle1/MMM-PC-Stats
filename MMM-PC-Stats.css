@@ -47,3 +47,27 @@
 	text-align: right;
 	margin-top: 0px;
 }
+
+.MMM-PC-Stats .core4Temp {
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
+}
+
+.MMM-PC-Stats .core5Temp {
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
+}
+
+.MMM-PC-Stats .core6Temp {
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
+}
+
+.MMM-PC-Stats .core7Temp {
+	color: cyan;
+	text-align: right;
+	margin-top: 0px;
+}
