@@ -59,7 +59,28 @@ module.exports = NodeHelper.create({
         } while(found)
       }
 
-      self.sendSocketNotification('TERMINAL_RESULT', pattern); // sends pattern, not result, not array, not objects
+      // create array
+      var data = [];
+      // set vars
+      var data  = rx.exec(str) ;
+      
+      // Make each into an object so they can be put into a rotation
+      fan1  =  {fan1};
+      fan2 = {fan2};
+      fan3 = {fan3};
+      temp1 = {temp1};
+      temp1 = {temp1};
+      temp2 = {temp2};
+      temp3 = {temp3};
+      Core_0 = {Core_0};
+      Core_0 = {Core_0};
+      Core_0 = {Core_0};
+      Core_0 = {Core_0};
+
+      data.push(fan1,fan2,fan3,temp1,temp1,temp2,temp3,Core_0,Core_1,Core_2,Core_3,); // push the data
+//      console.log(response.statusCode + data); // for checking
+
+      self.sendSocketNotification('TERMINAL_RESULT', data); // sends pattern, not result, not array, not objects
    });
 
 },
