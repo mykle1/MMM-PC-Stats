@@ -28,6 +28,8 @@ Module.register("MMM-PC-Stats", {
             "Core 7": [7],
         }
     },
+		isa_adapter:{},
+		pci_adapter:{},
 
     getStyles: function() {
         return ["MMM-PC-Stats.css"];
@@ -88,13 +90,13 @@ Module.register("MMM-PC-Stats", {
 
 
         // Check if Graphics cpu has temp sensor
-        var graphicsTempCheck = Sensors["nouveau-pci-0100"];
+        var graphicsTempCheck = this.pci_adapter;
         if (typeof graphicsTempCheck !== 'undefined') {
 
             // graphicsTemp
             var graphicsTemp = document.createElement("div");
             graphicsTemp.classList.add("small", "bright", "graphicsTemp");
-            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + Sensors["nouveau-pci-0100"]["PCI adapter"].temp1.value + "&deg;C";
+            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.value+ "&deg;C"; 
             wrapper.appendChild(graphicsTemp);
 
         }
@@ -107,127 +109,28 @@ Module.register("MMM-PC-Stats", {
                 Number(Math.round(Stats.cpu.threads[i].usage + 'e2') + 'e-2') + "%";
             wrapper.appendChild(Element);
         }
-
-        /*      // Can't get the dynamically created div's to work
-                // Hard coding 8 if statements below in the meantime
-                // need to map "Core 0" to just [0] for 8 "Cores"
-
-                for (var i = 0, len = Sensors['coretemp-isa-0000']['ISA adapter'].length; i < len; i++) {
-
-                    var newElement = document.createElement("div");
-                    newElement.classList.add("small", "bright", "coreNameTemp");
-                    newElement.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter'][i].name + " &nbsp  @  &nbsp "
-        								 + Sensors['coretemp-isa-0000']['ISA adapter'][i].value + "&deg;C";
-                    wrapper.appendChild(newElement);
-                }
-        */
-
-
-        // Check if core0 has temp sensor
-        var core0TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 0'];
-        if (typeof core0TempCheck !== 'undefined') {
-
-            var core0Temp = document.createElement("div");
-            core0Temp.classList.add("small", "bright", "core0Temp");
-            core0Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 0'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 0"].value + "&deg;C";
-            wrapper.appendChild(core0Temp);
-        }
-
-
-        // Check if core1 has temp sensor
-        var core1TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 1'];
-        if (typeof core1TempCheck !== 'undefined') {
-
-            var core1Temp = document.createElement("div");
-            core1Temp.classList.add("small", "bright", "core1Temp");
-            core1Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 1'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 1"].value + "&deg;C";
-            wrapper.appendChild(core1Temp);
-        }
-
-
-        // Check if there is a core2 and if it has temp sensor
-        var core2TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 2'];
-        if (typeof core2TempCheck !== 'undefined') {
-
-            var core2Temp = document.createElement("div");
-            core2Temp.classList.add("small", "bright", "core2Temp");
-            core2Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 2'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 2"].value + "&deg;C";
-            wrapper.appendChild(core2Temp);
-        }
-
-
-
-        // Check if there is a core3 and if it has temp sensor
-        var core3TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 3'];
-        if (typeof core3TempCheck !== 'undefined') {
-
-            var core3Temp = document.createElement("div");
-            core3Temp.classList.add("small", "bright", "core3Temp");
-            core3Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 3'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 3"].value + "&deg;C";
-            wrapper.appendChild(core3Temp);
-        }
-
-
-        // Check if there is a core4 and if it has temp sensor
-        var core4TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 4'];
-        if (typeof core4TempCheck !== 'undefined') {
-
-            var core4Temp = document.createElement("div");
-            core4Temp.classList.add("small", "bright", "core4Temp");
-            core4Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 4'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 4"].value + "&deg;C";
-            wrapper.appendChild(core4Temp);
-        }
-
-
-        // Check if there is a core5 and if it has temp sensor
-        var core5TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 5'];
-        if (typeof core5TempCheck !== 'undefined') {
-
-            var core5Temp = document.createElement("div");
-            core5Temp.classList.add("small", "bright", "core5Temp");
-            core5Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 5'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 5"].value + "&deg;C";
-            wrapper.appendChild(core5Temp);
-        }
-
-
-        // Check if there is a core6 and if it has temp sensor
-        var core6TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 6'];
-        if (typeof core6TempCheck !== 'undefined') {
-
-            var core6Temp = document.createElement("div");
-            core6Temp.classList.add("small", "bright", "core2Temp");
-            core6Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 6'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 6"].value + "&deg;C";
-            wrapper.appendChild(core6Temp);
-        }
-
-
-
-        // Check if there is a core7 and if it has temp sensor
-        var core7TempCheck = Sensors["coretemp-isa-0000"]['ISA adapter']['Core 7'];
-        if (typeof core7TempCheck !== 'undefined') {
-
-            var core7Temp = document.createElement("div");
-            core7Temp.classList.add("small", "bright", "core7Temp");
-            core7Temp.innerHTML = Sensors['coretemp-isa-0000']['ISA adapter']['Core 7'].name + " &nbsp  @  &nbsp " +
-                Sensors["coretemp-isa-0000"]["ISA adapter"]["Core 7"].value + "&deg;C";
-            wrapper.appendChild(core7Temp);
-        }
-
-
-//         // test
-//       var test = document.createElement("div");
-//         test.classList.add("small", "bright", "test");
-//         test.innerHTML = this.Terminal; //["0"].stdout; //['coretemp-isa-0000']['ISA adapter']['Core 0'].name + " &nbsp  @  &nbsp " +
-//         //    this.Terminal["coretemp-isa-0000"]["ISA adapter"]["Core 0"].value + "&deg;C";
-// //        console.log(this.Terminal); // for checking in dev console
-//         wrapper.appendChild(test);
+             
+							// loop thru any available cores..
+							// max cores - 8
+								//var adapter ='coretemp-isa-0000';
+                for (var i = 0;i<8; i++) {
+										let c="Core "+i;
+										try {
+											if(this.isa_adapter[c] !== "undefined"){
+ 		                	   var newElement = document.createElement("div");
+    		            	   newElement.classList.add("small", "bright", "core"+i+"Temp");
+        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].value+ "&deg;C";
+                  	  	 wrapper.appendChild(newElement);
+											}
+											else
+												break;
+										}
+										catch(exception)
+										{
+											// catch the reference error for 'Core 4' etc..
+												break;
+										}
+                }    
 
 
         return wrapper;
@@ -250,7 +153,32 @@ Module.register("MMM-PC-Stats", {
     },
 
     processSensors: function(data) {
-        this.Sensors = data;
+        this.Sensors = data; //JSON.parse(data);
+				// loop thru the primary keys of the object
+				for (var prop in this.Sensors) {
+					 // if this key is found 
+ 				   if (this.Sensors.hasOwnProperty(prop)) {
+						 // if this is an isa adapter		(watch out for case sensitivity)
+							if(this.Sensors[prop]['ISA adapter']	!= undefined){			
+								try {
+									// check to see if it has any cores, other ISA adapters do not!		
+										if(this.Sensors[prop]['ISA adapter']['Core 0'] !== undefined){
+											this.isa_adapter = this.Sensors[prop]['ISA adapter'];
+											continue
+									  }
+								}
+								catch(exception) {
+									continue
+								}
+						 }		// (watch out for case sensitivity)
+						else if(this.Sensors[prop]['PCI adapter'] != undefined) {
+									this.pci_adapter = this.Sensors[prop]['PCI adapter'];
+   							continue
+						 }
+
+ 				   }
+ 				   //Do your logic with the property here
+					}					
 //        this.loaded = true;
 //        		console.log(this.Sensors); // for checking in dev console
     },

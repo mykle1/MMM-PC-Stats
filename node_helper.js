@@ -27,16 +27,16 @@ module.exports = NodeHelper.create({
 
 	getSensors: function(url) {
          var self= this;
+
 		lm_sensors.sensors(function (data, error) {
 			if (error) throw error;
-            var result = data;
-			self.sendSocketNotification("SENSORS_RESULT", result);
+			self.sendSocketNotification("SENSORS_RESULT", data);
 //			console.log(result); // for checking
 		})
-    this.getTerminal();
+    //this.getTerminal();
     },
 
-    getTerminal: function(url) {
+/*    getTerminal: function(url) {
       var self= this;
 //      exec("sensors", (err, stdout, stderr) => console.log(stdout));
       exec("sensors").stdout.on('data', function(stdout) {
@@ -83,7 +83,7 @@ module.exports = NodeHelper.create({
       self.sendSocketNotification('TERMINAL_RESULT', data); // sends pattern, not result, not array, not objects
    });
 
-},
+},*/
 
 
     socketNotificationReceived: function(notification, payload) {
