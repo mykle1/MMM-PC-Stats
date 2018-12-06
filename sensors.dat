@@ -1,0 +1,25 @@
+nouveau-pci-0100
+Adapter: PCI adapter
+fan1: 1170 RPM
+temp1: +43.0°C (high = +95.0°C, hyst = +3.0°C)
+ (crit = +105.0°C, hyst = +5.0°C)
+ (emerg = +135.0°C, hyst = +5.0°C)
+
+coretemp-isa-0000
+Adapter: ISA adapter
+Core 0: +46.0°C (high = +83.0°C, crit = +99.0°C)
+Core 1: +41.0°C (high = +83.0°C, crit = +99.0°C)
+Core 2: +46.0°C (high = +83.0°C, crit = +99.0°C)
+Core 3: +38.0°C (high = +83.0°C, crit = +99.0°C)
+
+f71858fg-isa-0a00
+Adapter: ISA adapter
++3.3V: +3.31 V
+3VSB: +3.30 V
+Vbat: +3.20 V
+fan1: 1910 RPM
+fan2: 1069 RPM
+fan3: 0 RPM ALARM
+temp1: +34.5°C (high = +70.0°C, hyst = +60.0°C)
+temp2: +29.5°C (high = +100.0°C, hyst = +85.0°C)
+temp3: +36.4°C (high = +100.0°C, hyst = +85.0°C)
