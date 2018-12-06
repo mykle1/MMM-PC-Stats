@@ -96,7 +96,7 @@ Module.register("MMM-PC-Stats", {
             // graphicsTemp
             var graphicsTemp = document.createElement("div");
             graphicsTemp.classList.add("small", "bright", "graphicsTemp");
-            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.value +'C' ;
+            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.value+ "&deg;C"; 
             wrapper.appendChild(graphicsTemp);
 
         }
@@ -119,7 +119,7 @@ Module.register("MMM-PC-Stats", {
 											if(this.isa_adapter[c] !== "undefined"){
  		                	   var newElement = document.createElement("div");
     		            	   newElement.classList.add("small", "bright", "core"+i+"Temp");
-        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].value+'C';
+        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].value+ "&deg;C";
                   	  	 wrapper.appendChild(newElement);
 											}
 											else
