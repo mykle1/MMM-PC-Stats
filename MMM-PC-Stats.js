@@ -96,7 +96,7 @@ Module.register("MMM-PC-Stats", {
             // graphicsTemp
             var graphicsTemp = document.createElement("div");
             graphicsTemp.classList.add("small", "bright", "graphicsTemp");
-            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter["temp1"]["current"] ;
+            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.value +'C' ;
             wrapper.appendChild(graphicsTemp);
 
         }
@@ -119,7 +119,7 @@ Module.register("MMM-PC-Stats", {
 											if(this.isa_adapter[c] !== "undefined"){
  		                	   var newElement = document.createElement("div");
     		            	   newElement.classList.add("small", "bright", "core"+i+"Temp");
-        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].current;
+        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].value+'C';
                   	  	 wrapper.appendChild(newElement);
 											}
 											else
@@ -153,17 +153,17 @@ Module.register("MMM-PC-Stats", {
     },
 
     processSensors: function(data) {
-        this.Sensors = JSON.parse(data);
+        this.Sensors = data; //JSON.parse(data);
 				// loop thru the primary keys of the object
 				for (var prop in this.Sensors) {
 					 // if this key is found 
  				   if (this.Sensors.hasOwnProperty(prop)) {
-						 // if this is an isa adapter		(watch out for case sensitivity)				
-						 if("ISA adapter".toUpperCase() ==this.Sensors[prop].Adapter.toUpperCase()) {
+						 // if this is an isa adapter		(watch out for case sensitivity)
+							if(this.Sensors[prop]['ISA adapter']	!= undefined){			
 								try {
 									// check to see if it has any cores, other ISA adapters do not!		
-										if(this.Sensors[prop]['Core 0'] !== undefined){
-											this.isa_adapter = this.Sensors[prop];
+										if(this.Sensors[prop]['ISA adapter']['Core 0'] !== undefined){
+											this.isa_adapter = this.Sensors[prop]['ISA adapter'];
 											continue
 									  }
 								}
@@ -171,8 +171,8 @@ Module.register("MMM-PC-Stats", {
 									continue
 								}
 						 }		// (watch out for case sensitivity)
-						else if("PCI adapter".toUpperCase() ==this.Sensors[prop].Adapter.toUpperCase()) {
-									this.pci_adapter = this.Sensors[prop];
+						else if(this.Sensors[prop]['PCI adapter'] != undefined) {
+									this.pci_adapter = this.Sensors[prop]['PCI adapter'];
    							continue
 						 }
 

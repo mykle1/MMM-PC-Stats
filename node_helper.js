@@ -8,9 +8,6 @@ const NodeHelper = require('node_helper');
 const exec = require('child_process').exec;
 const request = require('pc-stats');
 var lm_sensors = require('sensors.js');
-const path = require('path');
-var converter=require(path.resolve(__dirname,'converter.js'))
-console.log(path.resolve(__dirname,'converter.js'))
 
 module.exports = NodeHelper.create({
 
@@ -32,16 +29,14 @@ module.exports = NodeHelper.create({
          var self= this;
 
 		lm_sensors.sensors(function (data, error) {
-			//if (error) throw error;
-console.log("data="+JSON.stringify(data))
-      var result = converter.convertToJson(data);
-			self.sendSocketNotification("SENSORS_RESULT", result);
+			if (error) throw error;
+			self.sendSocketNotification("SENSORS_RESULT", data);
 //			console.log(result); // for checking
 		})
-    this.getTerminal();
+    //this.getTerminal();
     },
 
-    getTerminal: function(url) {
+/*    getTerminal: function(url) {
       var self= this;
 //      exec("sensors", (err, stdout, stderr) => console.log(stdout));
       exec("sensors").stdout.on('data', function(stdout) {
@@ -88,7 +83,7 @@ console.log("data="+JSON.stringify(data))
       self.sendSocketNotification('TERMINAL_RESULT', data); // sends pattern, not result, not array, not objects
    });
 
-},
+},*/
 
 
     socketNotificationReceived: function(notification, payload) {
