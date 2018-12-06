@@ -28,6 +28,8 @@ Module.register("MMM-PC-Stats", {
             "Core 7": [7],
         }
     },
+		isa_adapter:{},
+		pci_adapter:{},
 
     getStyles: function() {
         return ["MMM-PC-Stats.css"];
@@ -88,13 +90,13 @@ Module.register("MMM-PC-Stats", {
 
 
         // Check if Graphics cpu has temp sensor
-        var graphicsTempCheck = Sensors["nouveau-pci-0100"];
+        var graphicsTempCheck = this.pci_adapter;
         if (typeof graphicsTempCheck !== 'undefined') {
 
             // graphicsTemp
             var graphicsTemp = document.createElement("div");
             graphicsTemp.classList.add("small", "bright", "graphicsTemp");
-            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + Sensors["nouveau-pci-0100"]["temp1"]["current"] ;
+            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter["temp1"]["current"] ;
             wrapper.appendChild(graphicsTemp);
 
         }
@@ -110,14 +112,14 @@ Module.register("MMM-PC-Stats", {
              
 							// loop thru any available cores..
 							// max cores - 8
-								var adapter ='coretemp-isa-0000';
+								//var adapter ='coretemp-isa-0000';
                 for (var i = 0;i<8; i++) {
 										let c="Core "+i;
 										try {
-											if(Sensors[adapter][c] !== "undefined"){
+											if(this.isa_adapter[c] !== "undefined"){
  		                	   var newElement = document.createElement("div");
     		            	   newElement.classList.add("small", "bright", "core"+i+"Temp");
-        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + Sensors[adapter][c].current;
+        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].current;
                   	  	 wrapper.appendChild(newElement);
 											}
 											else
@@ -152,6 +154,31 @@ Module.register("MMM-PC-Stats", {
 
     processSensors: function(data) {
         this.Sensors = JSON.parse(data);
+				// loop thru the primary keys of the object
+				for (var prop in this.Sensors) {
+					 // if this key is found 
+ 				   if (this.Sensors.hasOwnProperty(prop)) {
+						 // if this is an isa adapter		(watch out for case sensitivity)				
+						 if("ISA adapter".toUpperCase() ==this.Sensors[prop].Adapter.toUpperCase()) {
+								try {
+									// check to see if it has any cores, other ISA adapters do not!		
+										if(this.Sensors[prop]['Core 0'] !== undefined){
+											this.isa_adapter = this.Sensors[prop];
+											continue
+									  }
+								}
+								catch(exception) {
+									continue
+								}
+						 }		// (watch out for case sensitivity)
+						else if("PCI adapter".toUpperCase() ==this.Sensors[prop].Adapter.toUpperCase()) {
+									this.pci_adapter = this.Sensors[prop];
+   							continue
+						 }
+
+ 				   }
+ 				   //Do your logic with the property here
+					}					
 //        this.loaded = true;
 //        		console.log(this.Sensors); // for checking in dev console
     },
