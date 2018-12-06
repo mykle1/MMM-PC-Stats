@@ -8,6 +8,9 @@ const NodeHelper = require('node_helper');
 const exec = require('child_process').exec;
 const request = require('pc-stats');
 var lm_sensors = require('sensors.js');
+const path = require('path');
+var converter=require(path.resolve(__dirname,'converter.js'))
+console.log(path.resolve(__dirname,'converter.js'))
 
 module.exports = NodeHelper.create({
 
@@ -27,9 +30,11 @@ module.exports = NodeHelper.create({
 
 	getSensors: function(url) {
          var self= this;
+
 		lm_sensors.sensors(function (data, error) {
-			if (error) throw error;
-            var result = data;
+			//if (error) throw error;
+console.log("data="+JSON.stringify(data))
+      var result = converter.convertToJson(data);
 			self.sendSocketNotification("SENSORS_RESULT", result);
 //			console.log(result); // for checking
 		})

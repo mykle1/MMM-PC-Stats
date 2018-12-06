@@ -23,7 +23,7 @@ module.exports.convertToJson=function convertToJson(text)
 {
 //if(text===null)
   text=local_text;
-console.log("local-text="+text);
+//console.log("local-text="+text);
   // default line end character
 var lineend="\n";
 var carriage_return="\r"
@@ -84,7 +84,7 @@ if(end_of_line_marker!==expression_line_marker)
 var textForAdapter = text.split(lineend+lineend);
 
 // assume we will have an array of adapters..  only 1, still works
-output.push(begin_array);
+output.push(begin_structure);
 // loop thru the adapters of info
 // note that here the adapter info is still delimited as normal lines, which will make it harder to parse
 for( var i in textForAdapter)
@@ -104,7 +104,7 @@ for( var i in textForAdapter)
       if(started==false)
       {
         // adapter is a json structure
-        output.push(begin_structure);
+        //output.push(begin_structure);
         started=true;         
       }
 
@@ -302,13 +302,13 @@ for( var i in textForAdapter)
               break;
           } while(true)
             
-          output.push(end_structure+end_structure);     // close all the open structures for this adapter
+          output.push(end_structure);     // close all the open structures for this adapter
           started=false;          // tell start of new adapter to wrap with structure
           if(i<textForAdapter.length-1) // don't add comma for last adapter
             output.push(literal_comma)          
       }
     }
 }
-output.push(end_array)
+output.push(end_structure)
 return output.join(' ');
 }
