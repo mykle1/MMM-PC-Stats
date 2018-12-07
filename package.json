@@ -19,6 +19,7 @@
   "dependencies": {
     "pc-stats": "0.0.7",
     "sensors.js": "1.1.3",
-    "lm_sensors.js": "0.5.1"
+    "lm_sensors.js": "0.5.1",
+		"path": "0.12.7"
   }
 }

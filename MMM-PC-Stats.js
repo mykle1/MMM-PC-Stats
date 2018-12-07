@@ -96,7 +96,7 @@ Module.register("MMM-PC-Stats", {
             // graphicsTemp
             var graphicsTemp = document.createElement("div");
             graphicsTemp.classList.add("small", "bright", "graphicsTemp");
-            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.value+ "&deg;C"; 
+            graphicsTemp.innerHTML = this.config.videoCard + " temp @ " + this.pci_adapter.temp1.current+ "&deg;C"; 
             wrapper.appendChild(graphicsTemp);
 
         }
@@ -112,14 +112,13 @@ Module.register("MMM-PC-Stats", {
              
 							// loop thru any available cores..
 							// max cores - 8
-								//var adapter ='coretemp-isa-0000';
-                for (var i = 0;i<8; i++) {
+			            for (var i = 0;i<8; i++) {
 										let c="Core "+i;
 										try {
 											if(this.isa_adapter[c] !== "undefined"){
  		                	   var newElement = document.createElement("div");
     		            	   newElement.classList.add("small", "bright", "core"+i+"Temp");
-        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].value+ "&deg;C";
+        		        	   newElement.innerHTML = c + " &nbsp  @  &nbsp " + this.isa_adapter[c].current+ "&deg;C";
                   	  	 wrapper.appendChild(newElement);
 											}
 											else
@@ -153,17 +152,18 @@ Module.register("MMM-PC-Stats", {
     },
 
     processSensors: function(data) {
-        this.Sensors = data; //JSON.parse(data);
+				//var c = 'Core 0';
+        this.Sensors = JSON.parse(data);
 				// loop thru the primary keys of the object
 				for (var prop in this.Sensors) {
 					 // if this key is found 
  				   if (this.Sensors.hasOwnProperty(prop)) {
 						 // if this is an isa adapter		(watch out for case sensitivity)
-							if(this.Sensors[prop]['ISA adapter']	!= undefined){			
+							if(this.Sensors[prop].Adapter == 'ISA adapter'){			
 								try {
 									// check to see if it has any cores, other ISA adapters do not!		
-										if(this.Sensors[prop]['ISA adapter']['Core 0'] !== undefined){
-											this.isa_adapter = this.Sensors[prop]['ISA adapter'];
+										if(this.Sensors[prop]['Core 0'] !== undefined){
+											this.isa_adapter = this.Sensors[prop];
 											continue
 									  }
 								}
@@ -171,8 +171,8 @@ Module.register("MMM-PC-Stats", {
 									continue
 								}
 						 }		// (watch out for case sensitivity)
-						else if(this.Sensors[prop]['PCI adapter'] != undefined) {
-									this.pci_adapter = this.Sensors[prop]['PCI adapter'];
+						else if(this.Sensors[prop].Adapter == 'PCI adapter') {
+									this.pci_adapter = this.Sensors[prop];
    							continue
 						 }
 
