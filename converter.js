@@ -19,8 +19,7 @@ function wrap(str)
 }
 
       
-//module.exports.convertToJson=
-function convertToJson(text)
+module.exports.convertToJson= function convertToJson(text)
 {
 //if(text===null)
 //  text=local_text;
