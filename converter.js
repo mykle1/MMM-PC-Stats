@@ -3,7 +3,7 @@ const path=require('path')
 var local_text="";
 if(debug)
 {
-  var fn=path.resolve(__dirname,'sensors.dat');
+  var fn=path.resolve(__dirname,'output.txt');
   var fs = require("fs");
   // get the data content separated by the empty line between
   local_text = fs.readFileSync(fn)+ '';
@@ -19,7 +19,8 @@ function wrap(str)
 }
 
       
-module.exports.convertToJson= function convertToJson(text)
+module.exports.convertToJson=
+ function convertToJson(text)
 {
 //if(text===null)
 //  text=local_text;
@@ -81,7 +82,7 @@ if(end_of_line_marker!==expression_line_marker)
 }
 
 // split sensors output based on blank line between adapters   
-var textForAdapter = text.split(lineend+lineend);
+var textForAdapter = text.trim().split(lineend+lineend);
 
 // assume we will have an array of adapters..  only 1, still works
 output.push(begin_structure);
@@ -155,7 +156,7 @@ for( var i in textForAdapter)
             l=r1[3];
             // while there is data left
           } while (l.length>0)
-          output.push(end_structure+end_structure)         
+          output.push(end_structure+literal_comma)         
         }
       }
       else  // this data DOES have paren  
