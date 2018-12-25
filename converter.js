@@ -1,4 +1,4 @@
-var debug=true
+var debug=false
 const path=require('path')
 var local_text="";
 if(debug)
@@ -8,21 +8,22 @@ if(debug)
   // get the data content separated by the empty line between
   local_text = fs.readFileSync(fn)+ '';
   
-  //console.log(convertToJson(local_text))
+  console.log(convertToJson(local_text))
 }
 
 
 // add the double quotes around the json data
 function wrap(str)
 {
-  return "\""+str+"\""
+  return "\""+str.trim()+"\""
 }
 
       
-module.exports.convertToJson=function convertToJson(text)
+//module.exports.convertToJson=
+function convertToJson(text)
 {
 //if(text===null)
-  text=local_text;
+//  text=local_text;
 //console.log("local-text="+text);
   // default line end character
 var lineend="\n";
@@ -48,11 +49,11 @@ var literal_comma=","
 var open_paren=")"
 var empty_string=""
 var not_found=-1
-var expressions=["([^!]*)!([^:]*):\\s([^!]*)!(.*)",                           // 0, name and type
-                 "([^:]*):\\s([^!]*)!(.*)",                                   // 1, colon separated data before paren
-                 "\\((\\w*)\\s=\\s([^,]*),\\s(\\w*)\\s=\\s([^\\)]*)\\)",      // 2, data contains paren wrapped limits
-                 "([^:]*):\\s([^\\s]*)\\s(.*)",                               // 3, data up to the paren wrapped limits
-                 "([^:]*):\\s([^\\s]*)\\s\\((\\w*)\\s=\\s([^,]*),\\s(\\w*)\\s=\\s([^\\)]*)\\)!"  
+var expressions=["([^!]*)!([^:]*):\\s+([^!]*)!(.*)",                           // 0, name and type
+                 "([^:]*):\\s+([^!]*)!(.*)",                                   // 1, colon separated data before paren
+                 "\\((\\w*)\\s+=\\s+([^,]*),\\s+(\\w*)\\s+=\\s+([^\\)]*)\\)",      // 2, data contains paren wrapped limits
+                 "([^:]*):\\s+([^\\s]*)\\s+(.*)",                               // 3, data up to the paren wrapped limits
+                 "([^:]*):\\s+([^\\s]*)\\s+\\((\\w*)\\s+=\\s+([^,]*),\\s+(\\w*)\\s+=\\s+([^\\)]*)\\)!"  
                 ]                              
 
 // space for output
