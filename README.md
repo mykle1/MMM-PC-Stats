@@ -46,3 +46,5 @@ Now it gets the temperature of each core of your processor
     },
 	
 ## SpaceCowboysDude gets props for his loop magic trick and his combining 2 npm packages in one return
+
+## And Sam for his wizardry at getting data from a terminal command
