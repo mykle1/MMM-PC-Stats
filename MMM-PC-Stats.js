@@ -171,7 +171,7 @@ Module.register("MMM-PC-Stats", {
 									continue
 								}
 						 }		// (watch out for case sensitivity)
-						else if(this.Sensors[prop].Adapter == 'PCI adapter') {
+						else if(this.Sensors[prop].Adapter == 'PCI adapter' || this.Sensors[prop].Adapter == 'Virtual device') {
 									this.pci_adapter = this.Sensors[prop];
    							continue
 						 }
